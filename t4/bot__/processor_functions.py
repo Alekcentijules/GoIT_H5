@@ -40,10 +40,10 @@ def add_contact(args: List[str], contacts: Contacts) -> str:
         str: Message about the result
     """
     name, phone = args
+    if name in contacts:
+        raise ValueError("Contact already exist.")
     if not phone.isdigit():
-        return "When adding a phone number, only digits should be entered."
-    elif name in contacts:
-        return "This contact was add."
+        raise ValueError("Phone must contain only digits.")
     contacts[name] = phone
     return "Contact added!"
 
@@ -61,9 +61,9 @@ def change_contact(args: List[str], contacts: Contacts) -> str:
     """
     name, phone = args
     if name not in contacts:
-        return "This contact isn't in list."
-    elif not phone.isdigit():
-        return "When adding a phone number, only digits should be entered."
+        raise KeyError(name)
+    if not phone.isdigit():
+        raise ValueError("Phone must contain only digits.")
     contacts[name] = phone
     return "Contact changed!"
 
