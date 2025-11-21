@@ -1,7 +1,19 @@
 """The main module of the assistant bot."""
 
-from bot__ import parse_input, add_contact, change_contact, output_phone
 from typing import NoReturn
+from bot__ import (
+    parse_input, 
+    add_contact, 
+    change_contact, 
+    output_phone, 
+    handler_hello, 
+    handler_add, 
+    handler_change,
+    handler_phone,
+    handler_all,
+    handler_goodbye,
+    COMMANDS
+    )
 
 def main() -> NoReturn:
     """
@@ -22,23 +34,11 @@ def main() -> NoReturn:
 
             command, args = parse_input(user_input)
 
-            if command in ["close", "exit"]:
-                print("Good bye!")
-                break
-            elif command == "hello":
-                print("How can i help you?")
-            elif command == "add":
-                print(add_contact(args, contacts))
-            elif command == "change":
-                print(change_contact(args, contacts))
-            elif command == "phone": 
-                print(output_phone(args, contacts))
-            elif command == "all":
-                if not contacts:
-                    print("No contacts saved.")
-                else:
-                    for name, phone in contacts.items():
-                        print(name, phone)
+            if command in COMMANDS:
+                result = COMMANDS[command](args, contacts)
+                print(result)
+                if command in ['close', 'exit']:
+                    break
             else:
                 print("Invalid command!")
 

@@ -39,8 +39,6 @@ def add_contact(args: List[str], contacts: Contacts) -> str:
     Returns:
         str: Message about the result
     """
-    if len(args) != 2:
-        return "Add requires name and phone."
     name, phone = args
     if not phone.isdigit():
         return "When adding a phone number, only digits should be entered."
@@ -61,8 +59,6 @@ def change_contact(args: List[str], contacts: Contacts) -> str:
     Returns:
         str: Message about the result
     """
-    if len(args) != 2:
-        return "Change requires name and new phone."
     name, phone = args
     if name not in contacts:
         return "This contact isn't in list."
@@ -83,9 +79,5 @@ def output_phone(args: List[str], contacts: Contacts) -> str:
     Returns:
         str: Phone number or error message
     """
-    if len(args) != 1:
-        return "Phone requires exactly one name."
     name = args[0]
-    if name not in contacts:
-        return "This contact isn't in list."
     return contacts[name]

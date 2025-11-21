@@ -11,7 +11,7 @@ def generator_numbers(text: str) -> Generator[float, None, None]:
     Yields:
         float: Found numbers
     """
-    pattern = r"\d\d+\.\d+\b"
+    pattern = r" \d+\.\d+ "
     for num in re.findall(pattern, text):
         yield float(num)
 
